@@ -44,7 +44,7 @@ frame_ntsc = convert_rgb_frame_to_ntsc(frame)
 
 test_conversions(frame)
 
-pyr = build_lappyr(frame_ntsc, leveln)
+pyr = build_pyramid(frame_ntsc, leveln)
 
 lowpass1 = pyr
 lowpass2 = pyr
@@ -60,7 +60,7 @@ while True:
     if frame is None:
         break
     frame_ntsc = convert_rgb_frame_to_ntsc(frame)
-    pyr = build_lappyr(frame_ntsc, leveln)
+    pyr = build_pyramid(frame_ntsc, leveln)
 
     lowpass1 = (-high_b[1]*lowpass1 + high_a[0]*pyr + high_a[1]*pyr_prev)/high_b[0]
     lowpass2 = (-low_b[1]*lowpass2 + low_a[0]*pyr + low_a[1]*pyr_prev)/low_b[0]
@@ -83,7 +83,7 @@ while True:
         filtered[i] = (alpha if currAlpha > alpha else currAlpha) * filtered[i]
         lambda_vid /= 2
 
-    output_frame = merge_lappyr(filtered)
+    output_frame = merge_pyramid(filtered)
     output_frame[:,:,1] = output_frame[:,:,1] * chromAttenuation
     output_frame[:,:,2] = output_frame[:,:,2] * chromAttenuation
 

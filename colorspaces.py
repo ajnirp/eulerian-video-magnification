@@ -59,7 +59,7 @@ def show_image(image, window_name='test'):
         if (cv2.waitKey(1) & 0xFF) == 27:
             exit(0)
 
-def build_lappyr(img, leveln=6, dtype=np.int16):
+def build_pyramid(img, leveln=6, dtype=np.int16):
     levels = []
     for i in xrange(leveln-1):
         next_img = cv2.pyrDown(img)
@@ -69,7 +69,7 @@ def build_lappyr(img, leveln=6, dtype=np.int16):
     levels.append(img)
     return np.array(levels)
 
-def merge_lappyr(levels):
+def merge_pyramid(levels):
     img = levels[-1]
     for lev_img in levels[-2::-1]:
         img = cv2.pyrUp(img, dstsize=getsize(lev_img))
