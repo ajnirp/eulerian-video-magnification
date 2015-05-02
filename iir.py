@@ -60,10 +60,11 @@ while True:
     # ignore the highest and lowest frequencies
     for i in [leveln-1, 0]:
         filtered[i] = np.zeros(filtered[i].shape)
+        
+    h, w, _ = filtered[i].shape
+    lambda_vid = ((h**2 + w**2)**0.5)/3 # 3 is experimental constant
 
     for i in xrange(leveln-2,0,-1):
-        h, w, _ = filtered[i].shape
-        lambda_vid = ((h**2 + w**2)**0.5)/3 # 3 is experimental constant
         currAlpha = lambda_vid/delta/8 - 1
         currAlpha = currAlpha * exaggeration_factor
         filtered[i] = (alpha if currAlpha > alpha else currAlpha) * filtered[i]
