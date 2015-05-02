@@ -1,10 +1,8 @@
 #!/bin/bash
 
-MAGNIFICATION=
-
 function show_usage_and_exit {
 	echo "usage: ./magnify-video.sh filter_type video_file [magnification]"
-	echo "filter types: iir, ideal, butter"
+	echo "filter types: iir, butter"
 	exit 1
 }
 
@@ -20,6 +18,8 @@ function make_frames {
 function clean_frames_folder {
 	rm -f frames/*
 }
+
+MAGNIFICATION=
 
 if [ -z "$1" ] || [ -z "$2" ]
 then
